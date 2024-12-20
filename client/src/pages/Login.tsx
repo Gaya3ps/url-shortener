@@ -35,7 +35,7 @@ const Login: React.FC = () => {
       localStorage.setItem("token", access_token);
 
       alert("Login successful!");
-      navigate("/profile"); // Redirect to a protected route after login
+      navigate("/shorten-url"); // Redirect to a protected route after login
     } catch (err: any) {
       setError(err.response?.data?.message || "Invalid email or password");
     } finally {

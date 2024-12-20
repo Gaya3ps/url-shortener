@@ -16,7 +16,9 @@ const ShortenUrl: React.FC = () => {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem("token"); // Get JWT token from localStorage
+      const token = localStorage.getItem("token"); // Get JWT token from 
+      console.log("Token is hereeee", token);
+      
       if (!token) {
         throw new Error("User is not authenticated.");
       }

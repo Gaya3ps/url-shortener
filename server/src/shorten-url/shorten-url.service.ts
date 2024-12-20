@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { nanoid } from 'nanoid'; // For generating short IDs
+import { nanoid } from 'nanoid';
 import { ShortenUrl, ShortenUrlDocument } from './shorten-url.schema';
 
 @Injectable()

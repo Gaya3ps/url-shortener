@@ -3,6 +3,9 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
+const  JWT_SECRET = "my-super-secret-key";
+
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -10,19 +13,41 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  
   async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.usersService.findByEmail(email);
-    if (user && (await bcrypt.compare(password, user.password))) {
-      const { password, ...result } = user;
-      return result;
+    try {
+      const user = await this.usersService.findByEmail(email);
+      console.log(user,"👌")
+      if (user && (await bcrypt.compare(password, user.password))) {
+        const { password, ...result } = user;
+        
+        
+        return user;
+      }
+      throw new UnauthorizedException('Invalid credentials');
+    } catch (error) {
+      console.error('Error validating user:', error.message);
+      throw error;
     }
-    throw new UnauthorizedException('Invalid credentials');
   }
 
   async login(user: any) {
-    const payload = { email: user.email, sub: user._id };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    try {
+      console.log(user,"😍")
+      const { email, _id } = user._doc || user.toObject();
+      console.log(email,_id,"kkkkkk")
+      const payload = { email, userId: _id };
+
+            console.log(payload,"😁");
+      return {
+        access_token: this.jwtService.sign(payload, {
+          secret: process.env.JWT_SECRET || JWT_SECRET, // Use the secret here
+          expiresIn: '1h', // Optional expiration time
+        }),
+      };
+    } catch (error) {
+      console.error('Error generating JWT:', error.message);
+      throw new Error('Error generating token');
+    }
   }
 }

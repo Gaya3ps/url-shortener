@@ -2,6 +2,7 @@ import { Controller, Post, Get, Param, Body, UseGuards, Req } from '@nestjs/comm
 import { ShortenUrlService } from './shorten-url.service';
 import { AuthGuard } from '../guards/auth.guard';
 
+
 @Controller('shorten-url')
 export class ShortenUrlController {
   constructor(private readonly shortenUrlService: ShortenUrlService) {}
@@ -9,7 +10,10 @@ export class ShortenUrlController {
   @UseGuards(AuthGuard)
   @Post()
   async createShortUrl(@Body('originalUrl') originalUrl: string, @Req() req: any) {
-    const userId = req.user.userId; // Extract user ID from request
+    console.log('Request received in createShortUrl');
+    console.log('Headers:', req.headers);
+    const userId = req.user.userId; 
+    console.log(userId,"blaaaaaaaaa")
     return this.shortenUrlService.shortenUrl(originalUrl, userId);
   }
 
