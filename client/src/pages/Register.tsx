@@ -3,7 +3,7 @@ import axios from "axios";
 import config from "../config";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface RegisterForm {
   name: string;
@@ -121,12 +121,18 @@ const Register: React.FC = () => {
           </button>
           <p className="text-sm text-center text-gray-600 mt-6">
             Already have an account?{" "}
-            <a
+            {/* <a
               href="/login"
               className="text-purple-600 font-semibold hover:underline"
             >
               Log in
-            </a>
+            </a> */}
+            <Link
+            to="/register"
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+          >
+            Log in
+            </Link>
           </p>
         </form>
       </div>

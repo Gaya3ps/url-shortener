@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import config from "../config";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 
 interface LoginForm {
   email: string;
@@ -90,12 +90,18 @@ const Login: React.FC = () => {
 
           <p className="text-center text-gray-600 text-sm mt-4">
             Don't have an account?{" "}
-            <a
+            {/* <a
               href="/register"
               className="text-blue-500 hover:underline font-medium"
             >
               Register
-            </a>
+            </a> */}
+             <Link
+            to="/register"
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+          >
+            Register
+            </Link>
           </p>
         </form>
       </div>
