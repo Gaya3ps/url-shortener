@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import config from "../config";
-import {Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface LoginForm {
   email: string;
@@ -34,10 +36,18 @@ const Login: React.FC = () => {
       // Save the token in localStorage for future authenticated requests
       localStorage.setItem("token", access_token);
 
-      alert("Login successful!");
-      navigate("/shorten-url"); // Redirect to a protected route after login
+      toast.success("Login successful! Redirecting...", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+
+      setTimeout(() => {
+        navigate("/shorten-url"); // Redirect to a protected route after login
+      }, 2000);
     } catch (err: any) {
-      setError(err.response?.data?.message || "Invalid email or password");
+      const errorMessage = err.response?.data?.message || "Invalid email or password";
+      setError(errorMessage);
+      toast.error(errorMessage, { position: "top-right", autoClose: 3000 });
     } finally {
       setLoading(false);
     }
@@ -90,21 +100,16 @@ const Login: React.FC = () => {
 
           <p className="text-center text-gray-600 text-sm mt-4">
             Don't have an account?{" "}
-            {/* <a
-              href="/register"
-              className="text-blue-500 hover:underline font-medium"
+            <Link
+              to="/register"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
             >
               Register
-            </a> */}
-             <Link
-            to="/register"
-            className="font-medium text-indigo-600 hover:text-indigo-500"
-          >
-            Register
             </Link>
           </p>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
