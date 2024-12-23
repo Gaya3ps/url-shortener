@@ -1,6 +1,6 @@
 # URL-Shortener
 
-A simple and efficient URL shortener application that allows users to register, log in, and shorten URLs with redirection functionality.
+A simple, user-friendly URL Shortener platform built using **React** for the frontend and **NestJS** for the backend. This application allows users to register, log in, shorten URLs, and manage their shortened links securely.
 
 ---
 
@@ -11,20 +11,25 @@ A simple and efficient URL shortener application that allows users to register, 
 - **Redirection**: Shortened links redirect to the original URL.
 
 ---
+## Technology Stack
+### Frontend:
+- **React**
+- **React Router DOM**: For navigation.
+- **React Toastify**: For toast notifications.
+- **TailwindCSS**: For responsive UI styling.
+- **Axios**: For API requests.
 
-## Tech Stack
-- **Frontend**: TSX, Vite
-- **Backend**: TypeScript
-- **Hosting**:
-  - Backend: Render
-  - Frontend: Vercel
-- **Database**: MongoDB
+### Backend:
+- **NestJS**
+- **Mongoose**: For MongoDB integration.
+- **PassportJS**: For authentication.
+- **JWT (Json Web Tokens)**: For secure user authentication.
 
 ---
 
 ## Live Demo
 The application is deployed and accessible at:  
-**[Deployed URL](https://url-shortener-seven-tan.vercel.app)**
+**[Deployed URL](https://url-shortener-theta-black.vercel.app)**
 
 ---
 ## AI-Assisted Development:
@@ -39,6 +44,9 @@ By leveraging these tools, the development speed and code quality were significa
 ## Prerequisites
 - Node.js installed on your local machine.
 - Git installed for version control.
+- MongoDB (local or cloud-based)
+- NPM or Yarn
+
 
 ---
 
@@ -47,7 +55,7 @@ By leveraging these tools, the development speed and code quality were significa
 ### Clone the Repository
 Clone the repository and navigate into it:
 ```bash
-git clone https://github.com/CalypsoJeff/URL-Shortener.git
+git clone https://github.com/Gaya3ps/url-shortener.git
 cd URL-Shortener
 cd server
 npm install
