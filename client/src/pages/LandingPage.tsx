@@ -7,7 +7,7 @@ function LandingPage() {
     <div
       className="min-h-screen flex flex-col items-center justify-center bg-cover bg-center bg-fixed text-white"
       style={{
-        backgroundImage: `url('https://source.unsplash.com/1920x1080/?technology,abstract')`,
+        backgroundImage: `url('https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHRlY2hub2xvZ3klMjBhYnN0cmFjdHxlbnwwfHx8fDE2ODIwNzA2NzQ&ixlib=rb-4.0.3&q=80&w=1920')`,
       }}
     >
       <div className="bg-black bg-opacity-60 p-8 rounded-lg shadow-lg text-center">
