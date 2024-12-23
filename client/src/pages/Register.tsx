@@ -128,7 +128,7 @@ const Register: React.FC = () => {
               Log in
             </a> */}
             <Link
-            to="/register"
+            to="/login"
             className="font-medium text-indigo-600 hover:text-indigo-500"
           >
             Log in
