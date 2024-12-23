@@ -4,13 +4,8 @@ function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center bg-cover bg-center bg-fixed text-white"
-      style={{
-        backgroundImage: `url('https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHRlY2hub2xvZ3klMjBhYnN0cmFjdHxlbnwwfHx8fDE2ODIwNzA2NzQ&ixlib=rb-4.0.3&q=80&w=1920')`,
-      }}
-    >
-      <div className="bg-black bg-opacity-60 p-8 rounded-lg shadow-lg text-center">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white">
+      <div className="bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg text-center max-w-lg">
         <h1 className="text-5xl font-extrabold mb-6">
           Welcome to URL Shortener
         </h1>
