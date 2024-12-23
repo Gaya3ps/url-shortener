@@ -1,5 +1,5 @@
 const config = {
-    baseURL:  "http://localhost:3000", 
+    baseURL:  "https://url-shortener-b3qf.onrender.com", 
   };
   
   export default config;
