@@ -3,8 +3,8 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
-const  JWT_SECRET = "my-super-secret-key";
 
+const JWT_SECRET = 'secret123';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +22,7 @@ export class AuthService {
         const { password, ...result } = user;
         
         
-        return user;
+        return result;
       }
       throw new UnauthorizedException('Invalid credentials');
     } catch (error) {
@@ -36,8 +36,8 @@ export class AuthService {
       console.log(user,"😍")
       const { email, _id } = user._doc || user.toObject();
       console.log(email,_id,"kkkkkk")
-      const payload = { email, userId: _id };
-
+      // const payload = { email, userId: _id };
+      const payload = { email: user._doc.email, userId: user._doc._id };
             console.log(payload,"😁");
       return {
         access_token: this.jwtService.sign(payload, {

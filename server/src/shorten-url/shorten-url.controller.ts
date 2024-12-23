@@ -1,6 +1,7 @@
-import { Controller, Post, Get, Param, Body, UseGuards, Req } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, UseGuards, Req, Res } from '@nestjs/common';
 import { ShortenUrlService } from './shorten-url.service';
 import { AuthGuard } from '../guards/auth.guard';
+import { Response } from 'express';
 
 
 @Controller('shorten-url')
@@ -13,13 +14,16 @@ export class ShortenUrlController {
     console.log('Request received in createShortUrl');
     console.log('Headers:', req.headers);
     const userId = req.user.userId; 
-    console.log(userId,"blaaaaaaaaa")
+    console.log(userId,"hello it is mee")
     return this.shortenUrlService.shortenUrl(originalUrl, userId);
   }
 
   @Get(':shortId')
-  async redirectToOriginalUrl(@Param('shortId') shortId: string) {
+  async redirectToOriginalUrl(
+    @Param('shortId') shortId : string,
+    @Res() res:Response,
+  ) {
     const originalUrl = await this.shortenUrlService.getOriginalUrl(shortId);
-    return { originalUrl };
+    return res.redirect(originalUrl);
   }
 }

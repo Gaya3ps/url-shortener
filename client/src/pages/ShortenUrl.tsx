@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import config from "../config";
-
+import { useNavigate } from "react-router-dom";
 
 const ShortenUrl: React.FC = () => {
   const [originalUrl, setOriginalUrl] = useState<string>("");
   const [shortUrl, setShortUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,9 +17,9 @@ const ShortenUrl: React.FC = () => {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem("token"); // Get JWT token from 
+      const token = localStorage.getItem("token"); // Get JWT token from localStorage
       console.log("Token is hereeee", token);
-      
+
       if (!token) {
         throw new Error("User is not authenticated.");
       }
@@ -33,7 +34,7 @@ const ShortenUrl: React.FC = () => {
         }
       );
 
-      setShortUrl(`${config.baseURL}/shorten-url/${response.data.shortId}`);  
+      setShortUrl(`${config.baseURL}/shorten-url/${response.data.shortId}`);
       setOriginalUrl("");
     } catch (err: any) {
       setError(err.response?.data?.message || "An error occurred.");
@@ -42,12 +43,30 @@ const ShortenUrl: React.FC = () => {
     }
   };
 
+  const handleLogout = () => {
+    // Clear the token
+    localStorage.removeItem("token");
+    // Redirect to login page
+    navigate("/login");
+    // Prevent going back after logging out
+    window.history.pushState(null, "", window.location.href);
+    window.addEventListener("popstate", () => {
+      navigate("/login");
+    });
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
       <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Shorten Your URL
-        </h2>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-bold text-gray-800">Shorten Your URL</h2>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+          >
+            Logout
+          </button>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-600 mb-2">

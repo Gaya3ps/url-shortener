@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import config from "../config";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 interface RegisterForm {
   name: string;
@@ -18,18 +20,19 @@ const Register: React.FC = () => {
     confirmPassword: "",
   });
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (form.password !== form.confirmPassword) {
       setError("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
 
@@ -39,13 +42,14 @@ const Register: React.FC = () => {
         email: form.email,
         password: form.password,
       });
-      alert("Registration successful!");
+      toast.success("Registration successful! Redirecting to login...");
+      setTimeout(() => navigate("/login"), 2000); // Navigate after 2 seconds
     } catch (err: any) {
-      setError(err.response?.data?.message || "An error occurred.");
+      const errorMessage = err.response?.data?.message || "An error occurred.";
+      setError(errorMessage);
+      toast.error(errorMessage);
     }
   };
-
-
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
@@ -53,7 +57,7 @@ const Register: React.FC = () => {
         <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-8">
           Create Your Account
         </h2>
-         <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-600 mb-2">
               Name
@@ -126,6 +130,7 @@ const Register: React.FC = () => {
           </p>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
