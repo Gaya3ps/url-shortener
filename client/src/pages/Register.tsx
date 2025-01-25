@@ -27,12 +27,49 @@ const Register: React.FC = () => {
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const validateForm = (): boolean => {
+    // Check if all fields are filled
+    if (!form.name.trim()) {
+      toast.error("Name is required.");
+      return false;
+    }
+
+    if (!form.email.trim()) {
+      toast.error("Email is required.");
+      return false;
+    }
+
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      toast.error("Invalid email format.");
+      return false;
+    }
+
+    if (!form.password.trim()) {
+      toast.error("Password is required.");
+      return false;
+    }
+
+    // Password requirements
+    if (form.password.length < 6) {
+      toast.error("Password must be at least 6 characters long.");
+      return false;
+    }
 
     if (form.password !== form.confirmPassword) {
-      setError("Passwords do not match.");
       toast.error("Passwords do not match.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!validateForm()) {
       return;
     }
 
@@ -42,8 +79,9 @@ const Register: React.FC = () => {
         email: form.email,
         password: form.password,
       });
+
       toast.success("Registration successful! Redirecting to login...");
-      setTimeout(() => navigate("/login"), 2000); // Navigate after 2 seconds
+      setTimeout(() => navigate("/login"), 2000);
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || "An error occurred.";
       setError(errorMessage);
