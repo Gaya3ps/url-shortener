@@ -21,26 +21,9 @@ const Login: React.FC = () => {
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const validateForm = (): boolean => {
-    if (!form.email.trim()) {
-      toast.error("Email is required.", { position: "top-right", autoClose: 3000 });
-      return false;
-    }
-    if (!form.password.trim()) {
-      toast.error("Password is required.", { position: "top-right", autoClose: 3000 });
-      return false;
-    }
-    return true;
-  };
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-
-     // Validate form before proceeding
-     if (!validateForm()) return;
-
     setLoading(true);
     try {
       const response = await axios.post(`${config.baseURL}/auth/login`, {
