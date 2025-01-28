@@ -37,8 +37,11 @@ const Register: React.FC = () => {
     if (name.length > 50) {
       return "Name cannot exceed 50 characters";
     }
-    if (!/^[a-zA-Z\s'-]+$/.test(name)) {
-      return "Name can only contain letters, spaces, hyphens, and apostrophes";
+    if (/\s/.test(name)) {
+      return "Name cannot contain spaces";
+    }
+    if (!/^[a-zA-Z'-]+$/.test(name)) {
+      return "Name can only contain letters, hyphens, and apostrophes";
     }
   };
 
@@ -50,8 +53,8 @@ const Register: React.FC = () => {
   };
 
   const validatePassword = (password: string): string | undefined => {
-    if (password.length < 8) {
-      return "Password must be at least 8 characters long";
+    if (password.length < 6) {
+      return "Password must be at least 6 characters long";
     }
     if (password.length > 50) {
       return "Password cannot exceed 50 characters";
@@ -64,9 +67,6 @@ const Register: React.FC = () => {
     }
     if (!/[0-9]/.test(password)) {
       return "Password must contain at least one number";
-    }
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      return "Password must contain at least one special character";
     }
   };
 
