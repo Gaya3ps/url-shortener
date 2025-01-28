@@ -6,10 +6,6 @@ import { Request } from 'express';
 export class AuthGuard implements CanActivate {
   constructor(private readonly jwtService: JwtService) {}
 
-
-
-
-
   async canActivate(context: ExecutionContext):  Promise<any> {
     const request = context.switchToHttp().getRequest<Request>();
     const token = this.extractTokenFromHeader(request);

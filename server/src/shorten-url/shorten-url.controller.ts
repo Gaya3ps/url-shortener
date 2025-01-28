@@ -4,7 +4,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { Response } from 'express';
 
 
-@Controller('shorten-url')
+@Controller()
 export class ShortenUrlController {
   constructor(private readonly shortenUrlService: ShortenUrlService) {}
 
