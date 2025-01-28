@@ -4,12 +4,12 @@ import { AuthGuard } from '../guards/auth.guard';
 import { Response } from 'express';
 
 
-@Controller()
+@Controller('shorten-url')
 export class ShortenUrlController {
   constructor(private readonly shortenUrlService: ShortenUrlService) {}
 
   @UseGuards(AuthGuard)
-  @Post('shorten-url')
+  @Post()
   async createShortUrl(@Body('originalUrl') originalUrl: string, @Req() req: any) {
     console.log('Request received in createShortUrl');
     console.log('Headers:', req.headers);
