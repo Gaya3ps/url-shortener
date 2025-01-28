@@ -17,11 +17,8 @@ export class AuthService {
   async validateUser(email: string, password: string): Promise<any> {
     try {
       const user = await this.usersService.findByEmail(email);
-      console.log(user,"👌")
       if (user && (await bcrypt.compare(password, user.password))) {
         const { password, ...result } = user;
-        
-        
         return result;
       }
       throw new UnauthorizedException('Invalid credentials');
@@ -33,7 +30,6 @@ export class AuthService {
 
   async login(user: any) {
     try {
-      console.log(user,"😍")
       const { email, _id } = user._doc || user.toObject();
       console.log(email,_id,"kkkkkk")
       // const payload = { email, userId: _id };

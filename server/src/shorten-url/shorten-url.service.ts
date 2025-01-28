@@ -11,7 +11,7 @@ export class ShortenUrlService {
   ) {}
 
   async shortenUrl(originalUrl: string, userId: string): Promise<ShortenUrl> {
-    const shortId = nanoid(8); // Generate a unique short ID (8 characters)
+    const shortId = nanoid(8); 
     const newShortenUrl = new this.shortenUrlModel({
       originalUrl,
       shortId,

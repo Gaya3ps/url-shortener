@@ -22,10 +22,7 @@ export class ShortenUrlController {
     @Body('originalUrl') originalUrl: string,
     @Req() req: any,
   ) {
-    console.log('Request received in createShortUrl');
-    console.log('Headers:', req.headers);
     const userId = req.user.userId;
-    console.log(userId, 'hello it is mee');
     return this.shortenUrlService.shortenUrl(originalUrl, userId);
   }
 

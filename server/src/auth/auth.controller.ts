@@ -9,7 +9,6 @@ export class AuthController {
   async login(@Body() body: { email: string; password: string }) {
     try {
       const user = await this.authService.validateUser(body.email, body.password);
-      console.log(user,"😒")
       return this.authService.login(user);
     } catch (error) {
       console.error('Error during login:', error.message);
