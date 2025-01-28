@@ -40,8 +40,14 @@ const Register: React.FC = () => {
     if (/\s/.test(name)) {
       return "Name cannot contain spaces";
     }
-    if (!/^[a-zA-Z'-]+$/.test(name)) {
-      return "Name can only contain letters, hyphens, and apostrophes";
+    if (!/^[a-zA-Z][a-zA-Z'-]*[a-zA-Z]$/.test(name)) {
+      return "Name must start and end with a letter and can only contain letters, hyphens, and apostrophes";
+    }
+    if (/[-']{2,}/.test(name)) {
+      return "Name cannot contain consecutive hyphens or apostrophes";
+    }
+    if (!/[a-zA-Z]/.test(name)) {
+      return "Name must contain at least one letter";
     }
   };
 
