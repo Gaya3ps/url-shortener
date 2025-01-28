@@ -9,7 +9,7 @@ export class ShortenUrlController {
   constructor(private readonly shortenUrlService: ShortenUrlService) {}
 
   @UseGuards(AuthGuard)
-  @Post()
+  @Post('shorten-url')
   async createShortUrl(@Body('originalUrl') originalUrl: string, @Req() req: any) {
     console.log('Request received in createShortUrl');
     console.log('Headers:', req.headers);
